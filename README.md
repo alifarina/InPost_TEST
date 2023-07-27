@@ -16,16 +16,16 @@ Organize and refactor code the way you like to work (packages, modules, layers, 
 - Feel free to comment your choices
 
 ## Tasks
-1. Add grouping to the list of Shipments by flag **ShipmentNetwork.operations.highlight** 
-2. Style list items as in Figma (link: https://www.figma.com/file/MzPR3whRl6KB1fFnkyM6Or/recruitment-task) 
+1. Add grouping to the list of Shipments by flag **ShipmentNetwork.operations.highlight** ---- DONE
+2. Style list items as in Figma (link: https://www.figma.com/file/MzPR3whRl6KB1fFnkyM6Or/recruitment-task) ---- DONE
 3. Sort list items in groups by (the closest date to current date should be at top of the list):
     * status - order is described in `ShipmentStatus.kt` file (first item, should be at the top of list)
     * pickupDate
     * expireDate
     * storedDate
     * number
-4. Add pull to refresh and handle refresh progress 
-5. Add storing shipments locally (use Room) 
+4. Add pull to refresh and handle refresh progress --- DONE
+5. Add storing shipments locally (use Room) ---- DONE
 6. Add local archiving of the shipment:
     * We consider archiving as hiding the shipment from the list of `Shipment`s
     * Design is not important here

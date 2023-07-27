@@ -1,29 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_marginTop="16dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="10dp">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/archive"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="5dp"
+        android:src="@drawable/icons_archive"
+        app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintEnd_toStartOf="@id/status_img" />
+    <ImageView
+        android:id="@+id/status_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="5dp"
+        android:src="@drawable/truck"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+
+        android:id="@+id/ship_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="#E6E0E0"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:text="NR PRZESYLKI"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/shipmentNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="1234553459359043" />
+    <TextView
+        android:id="@+id/shipmentNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/ship_title"
+        tools:text="1234553459359043" />
 
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            tools:text="Gotowa do odbioru" />
-    </LinearLayout>
-</LinearLayout>
+    <TextView
+        android:id="@+id/status_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="STATUS"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/shipmentNumber" />
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/status_label"
+        tools:text="Gotowa do odbioru" />
+
+    <TextView
+        android:id="@+id/email_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="NADAWCA"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/status" />
+
+    <TextView
+        android:id="@+id/sender_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/email_label"
+        tools:text="Gotowa do odbioru" />
+
+    <TextView
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableRight="@drawable/plus_arrow"
+        android:drawablePadding="5dp"
+        android:text="PLUS"
+        android:textColor="#404041"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

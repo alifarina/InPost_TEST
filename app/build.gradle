@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "pl.inpost.recruitmenttask"
-        minSdk 21
+        minSdk 26
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -35,6 +35,9 @@ android {
     buildFeatures {
         viewBinding true
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 kapt {
@@ -51,6 +54,7 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.5.4'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.13.0'
+    implementation 'com.google.code.gson:gson:2.2.4'
 
     implementation 'com.google.dagger:hilt-android:2.44'
     kapt 'com.google.dagger:hilt-compiler:2.44'
@@ -61,4 +65,22 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation  'com.google.dagger:hilt-android-testing:2.47'
+
+    testImplementation 'io.mockk:mockk:1.13.4'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
+
+    debugImplementation("androidx.fragment:fragment-testing:1.5.7")
+    testImplementation "org.robolectric:robolectric:4.9"
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    //using UI automator
+    implementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+    //Idling resource
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.5.0-rc01'
+
+
+//Mockito
+    testImplementation "org.mockito:mockito-core:4.0.0"
+    testImplementation "org.mockito:mockito-inline:4.0.0"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:4.0.0"
 }
