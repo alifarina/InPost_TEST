@@ -15,11 +15,11 @@ import pl.inpost.recruitmenttask.network.model.ShipmentStatus
 class CustomExpandableListAdapter(
     private val context: Context,
     private val titleList: List<String>,
-    private val dataList: HashMap<String, List<ShipmentNetwork>>, private val callback: ListCallback
+    private val dataMap: HashMap<String, List<ShipmentNetwork>>, private val callback: ListCallback
 ) :
     BaseExpandableListAdapter() {
     override fun getChild(listPosition: Int, expandedListPosition: Int): Any {
-        return this.dataList[this.titleList[listPosition]]!![expandedListPosition]
+        return this.dataMap[this.titleList[listPosition]]!![expandedListPosition]
     }
 
     override fun getChildId(listPosition: Int, expandedListPosition: Int): Long {
@@ -59,7 +59,7 @@ class CustomExpandableListAdapter(
     }
 
     override fun getChildrenCount(listPosition: Int): Int {
-        return this.dataList[this.titleList[listPosition]]!!.size
+        return this.dataMap[this.titleList[listPosition]]?.size ?: 0
     }
 
     override fun getGroup(listPosition: Int): Any {

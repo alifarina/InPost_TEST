@@ -18,4 +18,8 @@ class HomeActivity : AppCompatActivity() {
                 .commitNow()
         }
     }
+
+    fun setFragment(){
+
+    }
 }

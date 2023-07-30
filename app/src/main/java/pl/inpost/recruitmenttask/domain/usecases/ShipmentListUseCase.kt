@@ -1,6 +1,5 @@
 package pl.inpost.recruitmenttask.usecases
 
-import android.util.Log
 import pl.inpost.recruitmenttask.domain.usecases.ShipmentUseCase
 import pl.inpost.recruitmenttask.network.model.ShipmentNetwork
 import pl.inpost.recruitmenttask.network.model.ShipmentStatus
@@ -20,7 +19,6 @@ class ShipmentListUseCase : ShipmentUseCase {
 
     override fun groupShipments(shipmentList: List<ShipmentNetwork>): HashMap<String, List<ShipmentNetwork>> {
         val groupedResult = shipmentList.groupBy { it.operations.highlight }
-        Log.d("shipments", shipmentList.size.toString())
         val mapTitleData = HashMap<String, List<ShipmentNetwork>>()
         groupedResult.forEach { (key, value) ->
             if (key) {

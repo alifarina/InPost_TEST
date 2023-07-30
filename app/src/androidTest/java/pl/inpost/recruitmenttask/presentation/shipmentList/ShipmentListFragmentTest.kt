@@ -18,21 +18,20 @@ import pl.inpost.recruitmenttask.presentation.home.HomeActivity
 
 class ShipmentListFragmentTest{
 
-    private var mLocatingActivity: HomeActivity? = null
+    private var mHomeActivity: HomeActivity? = null
 
     @get:Rule
-    public var mLoginActivityRule: ActivityTestRule<HomeActivity> = ActivityTestRule(
+    public var activityRule: ActivityTestRule<HomeActivity> = ActivityTestRule(
         HomeActivity::class.java
     )
 
     @Before
     fun registerIdlingResource() {
-        mLocatingActivity = mLoginActivityRule.activity;
-
+        mHomeActivity = activityRule.activity;
     }
 
     @Test
-    fun checkVisibility(){
-        Espresso.onView(withId(R.id.expandable_list_view)).check(ViewAssertions.matches(isDisplayed()))
+    fun checkVisibilityForNoData(){
+        Espresso.onView(withId(R.id.no_data_view)).check(ViewAssertions.matches(isDisplayed()))
     }
 }

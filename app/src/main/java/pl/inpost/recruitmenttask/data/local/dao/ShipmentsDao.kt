@@ -10,6 +10,9 @@ import pl.inpost.recruitmenttask.data.local.entities.Shipment
 import pl.inpost.recruitmenttask.data.local.entities.ShipmentUpdate
 import pl.inpost.recruitmenttask.network.model.ShipmentNetwork
 
+/**
+ * DAO for accessing database with queries
+ */
 @Dao
 interface ShipmentsDao {
 
@@ -17,7 +20,7 @@ interface ShipmentsDao {
     fun insertAllShipments(listOfShipments : List<Shipment>)
 
     @Update()
-    fun updateAllShipments(listOfShipments : List<ShipmentUpdate>)
+    fun updateAllShipments(listOfShipments: List<ShipmentUpdate>)
 
     @Query("select * from shipment  where is_archived = 0")
     fun getAllShipments() : List<Shipment>

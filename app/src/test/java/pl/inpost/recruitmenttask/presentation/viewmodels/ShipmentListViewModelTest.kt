@@ -1,6 +1,9 @@
 package pl.inpost.recruitmenttask.presentation.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -17,6 +20,7 @@ import org.junit.runners.JUnit4
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
+import pl.inpost.recruitmenttask.data.local.entities.Shipment
 import pl.inpost.recruitmenttask.data.repository.ShipmentRepositoryImpl
 import pl.inpost.recruitmenttask.domain.repository.ShipmentRepository
 import pl.inpost.recruitmenttask.network.model.ShipmentNetwork
@@ -31,6 +35,8 @@ class ShipmentListViewModelTest {
     @Mock
     private lateinit var useCase : ShipmentListUseCase
 
+    private  var liveDataListShipment = MutableLiveData<List<Shipment>>()
+
 
     private val testDispatcher = StandardTestDispatcher()
 
@@ -41,10 +47,20 @@ class ShipmentListViewModelTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         Dispatchers.setMain(testDispatcher)
+        Mockito.`when`(shipmentRepo.observeShipmentsData()).thenReturn(liveDataListShipment)
         viewModel = ShipmentListViewModel(shipmentRepo,useCase)
 
     }
 
+    @Test
+    fun checkObserver(){
+        val testMap = HashMap<String,List<ShipmentNetwork>>()
+        testMap["one"] = emptyList()
+        testMap["two"] = emptyList()
+        viewModel.setLiveData(testMap)
+
+        assertEquals(testMap, viewModel.viewState.value)
+    }
 
     @Test
     fun test_getShipments() = runTest {

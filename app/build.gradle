@@ -77,6 +77,9 @@ dependencies {
     implementation 'androidx.test.uiautomator:uiautomator:2.2.0'
     //Idling resource
     implementation 'androidx.test.espresso:espresso-idling-resource:3.5.0-rc01'
+    testImplementation "com.google.truth:truth:1.1.4"
+    androidTestImplementation "androidx.arch.core:core-testing:2.2.0"
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
 
 
 //Mockito

@@ -38,25 +38,33 @@ class ShipmentListFragment : Fragment(), CustomExpandableListAdapter.Companion.L
             binding.swipeRefresh.isRefreshing = false
         }
         // binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        return requireNotNull(binding).root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.viewState.observe(requireActivity()) { shipmentMap ->
-            expandableListView.setAdapter(context?.let {
-                CustomExpandableListAdapter(
-                    it,
-                    listOf("Gotowe do odbioru", "Pozostałe"),
-                    shipmentMap as HashMap<String, List<ShipmentNetwork>>, this
-                )
+            if (shipmentMap.isNotEmpty()) {
+                binding.noDataView.visibility = View.GONE
+                expandableListView.visibility = View.VISIBLE
+                expandableListView.setAdapter(context?.let {
+                    CustomExpandableListAdapter(
+                        it,
+                        listOf("Gotowe do odbioru", "Pozostałe"),
+                        shipmentMap as HashMap<String, List<ShipmentNetwork>>, this
+                    )
 
 
-            })
-            // To expand list by default
-            shipmentMap.keys.forEachIndexed { index, _ ->
-                expandableListView.expandGroup(index)
+                })
+                // To expand list by default
+                expandableListView.expandGroup(0)
+                expandableListView.expandGroup(1)
+
+            } else {
+                expandableListView.visibility = View.GONE
+                binding.noDataView.visibility = View.VISIBLE
             }
+
 
         }
 
