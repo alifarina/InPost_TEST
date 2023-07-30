@@ -10,9 +10,12 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.times
 import org.mockito.MockitoAnnotations
+import org.mockito.kotlin.doNothing
 import pl.inpost.recruitmenttask.data.local.DatabaseHolder
+import pl.inpost.recruitmenttask.data.local.dao.ShipmentsDao
+import pl.inpost.recruitmenttask.data.local.entities.Shipment
+import pl.inpost.recruitmenttask.data.local.entities.ShipmentUpdate
 import pl.inpost.recruitmenttask.domain.repository.ShipmentRepository
 import pl.inpost.recruitmenttask.network.api.ShipmentApi
 
@@ -27,23 +30,52 @@ class ShipmentRepositoryImplTest {
 
     private lateinit var shipmentRepo: ShipmentRepository
 
-    private val testDispatcher = StandardTestDispatcher()
+
+    private val listOfShipment = mutableListOf<Shipment>()
+    private val listOfShipmentUpdate = mutableListOf<ShipmentUpdate>()
+
+    @Mock
+    private lateinit var daoMock : ShipmentsDao
 
     @Before
     fun setup() {
         MockitoAnnotations.initMocks(this)
+        Mockito.`when`(databaseHolder.getShipmentsDao()).thenReturn(daoMock)
         shipmentRepo = ShipmentRepositoryImpl(databaseHolder, shipmentApi)
     }
 
     @Test
-    fun getShipmentsFromApi() = runTest {
-        Mockito.`when`(databaseHolder.getShipmentsDao().getAllShipments()).thenReturn(emptyList())
-        Mockito.`when`(shipmentApi.getShipments()).thenReturn(emptyList())
-
+    fun getShipmentsFromDatabase() = runTest {
+        Mockito.`when`(databaseHolder.getShipmentsDao().checkShipmentsCount()).thenReturn(3)
+        Mockito.`when`(databaseHolder.getShipmentsDao().getAllShipments()).thenReturn(listOfShipment)
         val listShipments = shipmentRepo.getAllShipments()
 
         assertEquals(0,listShipments.size)
-        //Mockito.verify(databaseHolder, times(1)).getShipmentsDao().getAllShipments()
+
+    }
+
+    @Test
+    fun getShipmentsFromApi() = runTest {
+
+        Mockito.`when`(shipmentApi.getShipments()).thenReturn(emptyList())
+        Mockito.`when`(databaseHolder.getShipmentsDao().checkShipmentsCount()).thenReturn(0)
+        Mockito.`when`(databaseHolder.getShipmentsDao().getAllShipments()).thenReturn(listOfShipment)
+        doNothing().`when`(daoMock).insertAllShipments(listOfShipment)
+        val listShipments = shipmentRepo.getAllShipments()
+
+        assertEquals(0,listShipments.size)
+
+    }
+
+    @Test
+    fun refreshDataFromApi() = runTest {
+
+        Mockito.`when`(shipmentApi.getShipments()).thenReturn(emptyList())
+        Mockito.`when`(databaseHolder.getShipmentsDao().getAllShipments()).thenReturn(listOfShipment)
+        doNothing().`when`(daoMock).updateAllShipments(listOfShipmentUpdate)
+        val listShipments = shipmentRepo.refreshShipments()
+
+        assertEquals(0,listShipments.size)
 
     }
 

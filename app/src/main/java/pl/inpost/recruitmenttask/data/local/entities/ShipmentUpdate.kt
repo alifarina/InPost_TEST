@@ -6,6 +6,9 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
+/**
+ * ShipmentUpdate does not have is_archived to avoid replacing tbe value on update
+ */
 @Entity(tableName = "shipment_update")
 data class ShipmentUpdate(
     @PrimaryKey @NonNull val number: String,

@@ -5,7 +5,7 @@ import pl.inpost.recruitmenttask.data.local.entities.Shipment
 import pl.inpost.recruitmenttask.network.model.ShipmentNetwork
 
 /**
- * contains functions that needs to be defined
+ * contains functions that needs to be implemented in repository implementation
  */
 interface ShipmentRepository {
 
